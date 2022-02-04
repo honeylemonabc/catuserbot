@@ -85,14 +85,14 @@ async def animator(media, mainevent, textevent):
     w, h = (-1, 512) if h > w else (512, -1)
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
-    BadCat = await event.client.download_media(media, Config.TEMP_DIR)
-    await catevent.edit("__🎞Converting into Animated sticker..__")
+    BadCat = await mainevent.client.download_media(media, Config.TEMP_DIR)
+    await textevent.edit("__🎞Converting into Animated sticker..__")
     await runcmd(
         f"ffmpeg -ss 00:00:00 -to 00:00:03 -i {BadCat} -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an animate.webm"
     )  # pain
     os.remove(BadCat)
     sticker = "animate.webm"
-    await catevent.delete()
+    await textevent.delete()
     return sticker
 
 
