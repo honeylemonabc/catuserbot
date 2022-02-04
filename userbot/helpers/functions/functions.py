@@ -8,7 +8,7 @@ import requests
 from googletrans import Translator
 
 from ..utils.extdl import install_pip
-from ..utils.utils import _catutils
+from ..utils.utils import runcmd
 
 try:
     from imdb import IMDb
@@ -87,7 +87,7 @@ async def animator(media, mainevent, textevent):
         os.makedirs(Config.TEMP_DIR)
     BadCat = await event.client.download_media(media, Config.TEMP_DIR)
     await catevent.edit("__🎞Converting into Animated sticker..__")
-    await _catutils.runcmd(
+    await runcmd(
         f"ffmpeg -ss 00:00:00 -to 00:00:03 -i {BadCat} -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an animate.webm"
     )  # pain
     os.remove(BadCat)
