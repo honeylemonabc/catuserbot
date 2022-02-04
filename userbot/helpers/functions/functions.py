@@ -1,5 +1,4 @@
 import os
-import asyncio
 import zipfile
 from random import choice
 from textwrap import wrap
@@ -20,9 +19,9 @@ from PIL import Image, ImageColor, ImageDraw, ImageFont
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from ...Config import Config
-from .helpers.utils import _catutils
 from ...sql_helper.globals import gvarstatus
 from ..resources.states import states
+from .helpers.utils import _catutils
 
 imdb = IMDb()
 
@@ -79,16 +78,18 @@ async def age_verification(event, reply_to_id):
     return True
 
 
-async def animator(media,mainevent,textevent):
-#//Hope u dunt kang :/ @Jisan7509
+async def animator(media, mainevent, textevent):
+    # //Hope u dunt kang :/ @Jisan7509
     h = media.file.height
     w = media.file.width
-    w,h = (-1,512) if h>w else (512, -1)
+    w, h = (-1, 512) if h > w else (512, -1)
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
-    BadCat = await event.client.download_media(media,Config.TEMP_DIR)
+    BadCat = await event.client.download_media(media, Config.TEMP_DIR)
     await catevent.edit("__🎞Converting into Animated sticker..__")
-    await _catutils.runcmd(f"ffmpeg -ss 00:00:00 -to 00:00:03 -i {BadCat} -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an animate.webm") #pain
+    await _catutils.runcmd(
+        f"ffmpeg -ss 00:00:00 -to 00:00:03 -i {BadCat} -vf scale={w}:{h} -c:v libvpx-vp9 -crf 30 -b:v 560k -maxrate 560k -bufsize 256k -an animate.webm"
+    )  # pain
     os.remove(BadCat)
     sticker = "animate.webm"
     await catevent.delete()
