@@ -92,7 +92,6 @@ async def animator(media, mainevent, textevent):
     )  # pain
     os.remove(BadCat)
     sticker = "animate.webm"
-    await textevent.delete()
     return sticker
 
 
