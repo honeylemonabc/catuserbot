@@ -7,7 +7,9 @@ from uuid import uuid4
 import requests
 from googletrans import Translator
 
-from ..utils import _catutils, install_pip
+from ..utils.extdl import install_pip
+from ..utils.utils import _catutils
+
 
 try:
     from imdb import IMDb
