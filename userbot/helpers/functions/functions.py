@@ -7,7 +7,7 @@ from uuid import uuid4
 import requests
 from googletrans import Translator
 
-from ..utils.extdl import install_pip
+from ..utils import install_pip, _catutils
 
 try:
     from imdb import IMDb
@@ -21,7 +21,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from ...Config import Config
 from ...sql_helper.globals import gvarstatus
 from ..resources.states import states
-from .helpers.utils import _catutils
+
 
 imdb = IMDb()
 
